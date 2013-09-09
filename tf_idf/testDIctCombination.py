@@ -22,23 +22,49 @@ for folder in glob.glob('./document_frequencies/*'):
         for term in d_dict:
             if i == 1:
                 newTerm = term,
+                newTerm = unicode(termToString(newTerm))
                 docFreqDict[newTerm] = docFreqDict[newTerm] + d_dict[term]
             else:
-                docFreqDict[term] = docFreqDict[term] + d_dict[term]
+                newTerm = unicode(termToString(term))
+                docFreqDict[newTerm] = docFreqDict[newTerm] + d_dict[term]
             # print '**'
         # print docFreqDict[term]
 
         # print docFreqDict[term]
         # print '**'
 
-con = lite.connect('./sqliteTest/test.db')
-with con:
-    cur = con.cursor()
-    cur.execute("DROP TABLE IF EXISTS Terms")
-    cur.execute("CREATE TABLE Terms(Term TEXT, DocFreq INT)")
-    cur.executemany("INSERT INTO Terms VALUES (?,?)", ((termToString(key),docFreqDict[key]) for key in docFreqDict.iterkeys()))
+print "Max value", max(value for value in docFreqDict.itervalues())
+# sortedUnicodeKeys = sorted(key for key in docFreqDict.iterkeys())
+
+# print "SORTED"
+# import datrie
+# import string
+
+# tenth = len(docFreqDict)/10
+# for i in xrange(1,11):
+#     trie = datrie.BaseTrie(string.printable)
+
+#     l = tenth
+#     count = 1
+
+#     for key in sortedUnicodeKeys[i*tenth:(i+1)*tenth]:
+#         if count % 1000 == 1:
+#             print count
+#             print l
+#         trie[key] = docFreqDict[key]
+#         count += 1
+
+#     trie.save('my.trie'+str(i))
+# # con = lite.connect('./sqliteTest/test.db')
+# # with con:
+# #     cur = con.cursor()
+# #     cur.execute("DROP TABLE IF EXISTS Terms")
+# #     cur.execute("CREATE TABLE Terms(Term TEXT, DocFreq INT)")
+# #     cur.executemany("INSERT INTO Terms VALUES (?,?)", ((termToString(key),docFreqDict[key]) for key in docFreqDict.iterkeys()))
 
 for x in docFreqDict.keys()[:1000]:
     print x
-    print termToString(x)
 print len(docFreqDict)
+
+y = zip(docFreqDict.iterkeys(),docFreqDict.itervalues())
+print y[:100]
