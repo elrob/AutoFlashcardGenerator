@@ -1,2 +1,5 @@
 # ignore all files ending with ~
 *~ 
+
+# ignore all db files
+*.db
