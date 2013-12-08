@@ -1,9 +1,7 @@
-###
-Note:
-There should be a folder named 'document_frequencies' (pickle files)
-inside the 'tf_idf' directory for using the tf-idf terminology extraction. 
-This folder is 395MB so couldn't be included in the submission.
-###
+
+Final Submission of code for my MSc Project entitled:
+
+Optimizing Terminology Extraction and Information Retrieval for the Automatic Generation of Flashcards from Lecture Notes
 
 
 
